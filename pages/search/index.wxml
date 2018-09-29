@@ -1,0 +1,23 @@
+<view class="search-page">
+    <view class="search-top">
+        <view class="input_container" style="background-image: url('https://upyun.lesson.bbwansha.com/dub/program/images/search/search_input.png');">
+            <input type="text" value="{{word}}"  confirm-type="search"  bindblur="bindBlur" bindinput="bindInput" bindconfirm="bindConfirm" />
+        </view>
+        <view class="search-delete can-clear}}" bindtap="deleteWord" wx:if="{{isCanClear}}">
+            
+        </view>
+        <view class="search-delete" wx:else>
+            
+        </view>
+    </view>
+    <view class="search-body">
+        <view class="title">
+            <text>搜索热词</text>
+        </view>
+        <view class="search-record">
+            <view class="search-li" wx:for="{{hotWordArr}}" bindtap="changeWord" data-word="{{item.words}}">
+                <text>{{item.words}}</text>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,20 @@
+{
+  "pages":[
+    "pages/home/index",
+      "pages/comment/index",
+    
+    "pages/search/index",
+    "pages/search_result/index",
+    
+  
+    
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "主播百科",
+    "navigationBarTextStyle":"black"
+  }
+}

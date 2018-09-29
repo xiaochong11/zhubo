@@ -1,0 +1,81 @@
+.search-page{
+	min-height: 100vh;
+}
+.search-top{
+	display: flex;
+	background:rgba(220,243,255,1);
+	padding:16rpx;
+	box-sizing: border-box;
+
+}
+
+.input_container{
+	width:618rpx;
+	height:92rpx;
+	padding-left: 36rpx;
+	box-sizing: border-box;
+	background-size: 100% 100%;
+	border:none;
+	border-radius: none;
+}
+.input_container input{
+	width:582rpx;
+	height:92rpx;
+	line-height: 92rpx;
+	font-size:30rpx;
+}
+.search-delete{
+	width:88rpx;
+	height:92rpx;
+	background-size: 100% 100%;
+	margin-left: 12rpx;
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABcCAMAAADd2oIQAAAAwFBMVEUAAAACAgIAAAAAAAAHBwcAAAD///////////9JSUn////Jycn////////9/f3////////x8fH////p6en///////////8AAAD////+/v7////////7+/v7+/vl5eX7+/v5+fn////4+Pj////39/f////19fX09PT////y8vL////////u7u7q6ur///+/v7+3t7fj4+P///+5xtb7/P3L1eG+ytny9Pfc4+vs8PXV3efm6/H4+vvg5u3Cztz09vnv1+zLAAAAMnRSTlMADwIMCQf779IT5zYG89++k4JwZmI4LAXs5d/XyMVbzbOxrqiknZqPi4iBeXVvNDAuWpu64hoAAANQSURBVFjDrNXNaoQwFIbhrDSEEUWMiK5kEETBxRennf/e/121mzZMNfrp5N0KzyLnmAiiIWtrWaowCEJVyrrNBvF+uosjTIriTr+j5omCM5Xk+9RDKrGSTHewvQKR6g/b3LQAWZEKPi2xIanZU2gCbCpoqPPIK2yuIhYki7CjKFtzE+wsWXaP2N1xaWwx3ih2j9Dh0rLnc7Adibl5nGAGD2VTN4/goSifLEQFL1X/V6OBp5pXVwfwVKBfYAlvyZd7HR5LrXso4LHCzq+H1/o/WMFryp6w59K1lRgf1xtmu5/tF+di5E73aYw5jZj2+WGMucJZvnyrPYyx8sQ15guukuXRXY2VZ1xzWR6fhqubsfKMa+5wpn/gDs5OVp5xH3DXLT90o5Wn7nnt+YvAyryLSIgBYGXeBQaRgZd5F5lowcu8i1bUoOUL76IWErRseBdSlOBl3kUpFHiZd6FECF7mXYQiANPl132OoAoI2O6v/VMIOCTdjXIovluzv9YGYSgK4PfcJHNBEMQH56a2lNJSaGnXh20d+/P9v9XI5hqKTZbMnFflx+V4FdEmzI2VG3oIdz8i5Adqg90XsxuhckvLYPd4jJCXVIa7MXJJfbAbJfeUh7pxck4yC3Pj5EySmjuPvl24Y9kDzxXVW+fRF+telZ/d8LYmdpf8at2r8slTMROj8LwJWXcsP7lLLsBEYuMd+d31fH7yvMduBBGpvfuEz9Oba2FOvqXYKyJitMfEacEGFlVquBJkInWR1i0gyYSxSwvvwPQdoZuUbqMF/UShStow1ACzQJfO7SCYziPn6T4r5FD0GwbWqeA1wHSOgp6lcWfaDGwjcMhSuNkBw0rYMvoUcD8UYSOBcrpbApIuwwJYTXVXsKtmZQCLae4CANMoNaAXk1wN1HQlEpPaWMEWPJInXMHS7RIbuc/+tb+9cZl88mEW784O1nXLeh37g2Wtfa7tGXkX43Y5bL/u1DCpmlC2qQA49mx8DwJ6V4SwxU4Do/vNU7Shq/Yvtq00YOsNHRrYbwrPsJs9YMcNjMKQfDvPxmg23+YYoigqrATO+GO57G7v725u7u5vu2X5eEYhlBk3nvbGsvG2FB5VjtTpc9tZJ9lcKynEIAqpag5QvwDwk6QdRPqnAwAAAABJRU5ErkJggg==');
+}
+
+.can-clear{
+	background-image: url('https://upyun.lesson.bbwansha.com/dub/program/images/home/home_window_btn_close copy.png');
+}
+
+.search-body{
+	padding:24rpx;
+	box-sizing: border-box;
+	min-height: calc(100vh - 62rpx);
+	background-color:#ccecfe;
+}
+
+.search-body .title{
+	font-size:24rpx;
+	font-family:PingFangSC-Regular;
+	color:rgba(27,161,228,1);
+	margin-bottom:24rpx;
+}
+.search-body{
+	
+}
+.search-record{
+	display: flex;
+	flex-wrap: wrap;
+}
+.search-body .search-li{
+	height:56rpx;
+	box-sizing: border-box;
+	line-height:56rpx;
+	padding:0 24rpx;
+	background:rgba(255,255,255,1);
+	border-radius:28px;
+	font-size:24rpx;
+	font-family:PingFangSC-Regular;
+	color:rgba(53,53,53,1);
+	margin-right:24rpx;
+	margin-bottom:16rpx;
+}
+.search-body .search-li text{
+	white-space: nowrap;
+}
+
+
+
+
+
+
+

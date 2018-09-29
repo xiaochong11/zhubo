@@ -1,0 +1,54 @@
+<view class="comment-page">
+    <view class="anchor-info">
+        <view class="anchor-avatar">
+            <image mode="widthFix" src="{{anchorCommentObj.anchorInfo.anchor_img}}"></image>
+        </view>
+        <view class="anchor-detail">
+            <view class="anchor-os">
+              <!--   <image mode="widthFix" src="{{anchorCommentObj.anchorInfo.osIcon}}"></image> -->
+                <text>{{anchorCommentObj.anchorInfo.osName}}</text>
+            </view>
+            <view>
+                <text>{{anchorCommentObj.anchorInfo.anchor_name}}</text>
+            </view>
+        </view>
+        <view>
+            <text>热度：{{anchorCommentObj.anchorInfo.rateAvg}}</text>
+        </view>
+        <view class="send-btn" bindtap="addComment">
+            <text>发表短评</text>
+        </view>
+    </view>
+    <scroll-view class="anchor-comment-container" scroll-y bindscrolltolower="scrollToLower">
+        <view class="anchor-comment" wx:for="{{anchorCommentObj.commentList}}">
+            <view class="main">
+                <view class="user-info">
+                    <image mode="widthFix" src="http://img3.imgtn.bdimg.com/it/u=924427432,4036562115&fm=27&gp=0.jpg"></image>
+                    <view class="user-name">{{item.comment_auth||'匿名网友'}}</view>
+                </view>
+                <view class="comment">
+                    <view class="content">
+                        <rich-text nodes="{{item.content}}"></rich-text>
+                    </view>
+                    <view class="date">{{item.comment_date}}</view>
+                </view>
+            </view>
+            <view class="footer">
+                <view class="up-sec" bindtap="addUpNum" data-comment_id="{{item.comment_id}}">
+                    <view class="up-icon"></view>
+                    <text>{{item.comment_up}}</text>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <view class="comment-mask" wx:if="{{isDialogShow}}" capture-bind:touchstart="hideDialog">
+       
+    </view>
+    <view class="comment-dialog" wx:if="{{isDialogShow}}">
+        <view>
+            <text>添加短评</text>
+        </view>
+        <input placeholder="为主播加油吧"  bindblur="inputBlur"/>
+        <button bindtap="commentSubmmit">提交</button>
+    </view>
+</view>
