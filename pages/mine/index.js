@@ -34,7 +34,7 @@ Page({
 	getUserAttention(user_id){
         let self = this;
         wx.request({
-            url: 'http://127.0.0.1:3000/api/site'+'/userInfo/getUserAttention',
+            url: baseUrl+'/userInfo/getUserAttention',
             method: 'GET',
             data: {
                 user_id:user_id,

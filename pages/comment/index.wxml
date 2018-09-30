@@ -13,7 +13,7 @@
             </view>
         </view>
         <view>
-            <text>热度：{{anchorCommentObj.anchorInfo.rateAvg}}</text>
+            <text>热度：{{anchorCommentObj.anchorInfo.rateAvg||0}}</text>
         </view>
         <view class="attention" bindtap="addAttention">
             <view class="heart {{isAttention?'red':''}}"></view>

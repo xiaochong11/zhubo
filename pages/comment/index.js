@@ -29,7 +29,7 @@ Page({
   	},
     getUserAnchorAttention(anchor_id){
         wx.request({
-            url: 'http://127.0.0.1:3000/api/site'+'/userInfo/checkAttention',
+            url: baseUrl+'/userInfo/checkAttention',
             method: 'GET',
             data: {
                 anchor_id:anchor_id,
@@ -110,6 +110,12 @@ Page({
         this.getAnchorComment(this.anchor_id);
     },
     addUpNum(e){
+        if(!globalData.userInfo.user_avatar){
+            wx.switchTab({
+                url:'../mine/index'
+            });
+            return;
+        } 
          let comment_id = e.currentTarget.dataset.comment_id;
          wx.request({
             url: baseUrl+'/anchor/updateCommentTimes',
@@ -156,12 +162,18 @@ Page({
     },
     commentSubmmit(){
         console.log(this.inputValue);
+        if(!globalData.userInfo.user_avatar){
+            wx.switchTab({
+                url:'../mine/index'
+            });
+            return;
+        } 
         wx.request({
             url: baseUrl+'/anchor/postAnchorComment',
             method: 'POST',
             data: {
                 anchor_id:this.anchor_id,
-                comment_auth_id:0,
+                comment_auth_id:globalData.userInfo.user_id,
                 rate:5,
                 content:this.inputValue
             },
@@ -190,6 +202,12 @@ Page({
 
     },
     addAttention(){
+        if(!globalData.userInfo.user_avatar){
+            wx.switchTab({
+                url:'../mine/index'
+            });
+            return;
+        } 
         if(this.data.isAttention){
             wx.showToast({
                 title:'你已关注',
@@ -198,7 +216,7 @@ Page({
             return;
         }
         wx.request({
-            url: 'http://127.0.0.1:3000/api/site/userInfo/addAttention',
+            url: baseUrl+'/userInfo/addAttention',
             method: 'POST',
             data: {
                 user_id:globalData.userInfo.user_id,
