@@ -15,6 +15,46 @@
 	line-height: 50rpx;
 	
 }
+
+.attention{
+	/*position: absolute;
+	left:30rpx;
+	top:50%;
+	transform: translateY(-50%);*/
+	margin:20rpx auto 0;
+}
+.heart {
+	background-color: #fff;
+	display: inline-block;
+	height: 30rpx;
+	/*margin: 0 40px;*/
+	/*position: relative;
+	top: 0;*/
+	transform: rotate(-45deg);
+	width: 30rpx;
+	/*margin-top: 50px;*/
+	text-align: center;
+}
+.heart.red{
+	background-color: red;
+}
+.heart:before,
+.heart:after {
+	content: "";
+	background-color: #fff;
+	border-radius: 50%;
+	height: 30rpx;
+	position: absolute;
+	width: 30rpx;
+}
+.heart.red:before,
+.heart.red:after{
+	background-color: red;
+}
+.heart:before {
+	top: -15rpx;
+	left: 0;
+}
 .send-btn{
 	position: absolute;
 	right:0;
@@ -45,19 +85,19 @@
 .anchor-detail .anchor-os{
 	height: 40rpx;
 	line-height: 40rpx;
-    padding: 0 10rpx;
-    position: relative;
-    top: -4rpx;
-    margin-right: 10rpx;
-    margin-left:20rpx;
+	padding: 0 10rpx;
+	position: relative;
+	top: -4rpx;
+	margin-right: 10rpx;
+	margin-left:20rpx;
 
 	color: #29d58e;
-    border: 2rpx solid #29d58e;
-    border-radius: 6rpx;
-    background: #edfcf6;
+	border: 2rpx solid #29d58e;
+	border-radius: 6rpx;
+	background: #edfcf6;
 
-    font-size:24rpx;
-   	margin-top:10rpx;
+	font-size:24rpx;
+	margin-top:10rpx;
 }
 .anchor-detail image{
 	width:40rpx;
@@ -70,11 +110,11 @@
 .anchor-comment-container .anchor-comment{
 	padding:32rpx 20rpx;
 	margin-bottom: 20rpx;
-    background: #fff;
-    overflow: hidden;
-    box-sizing: border-box;
-    box-shadow: 0 2rpx 6px rgba(26,26,26,.1);
-    border-radius: 2rpx;
+	background: #fff;
+	overflow: hidden;
+	box-sizing: border-box;
+	box-shadow: 0 2rpx 6px rgba(26,26,26,.1);
+	border-radius: 2rpx;
 }
 
 .anchor-comment-container .main{
@@ -109,19 +149,19 @@
 .up-sec{
 	margin-top:20rpx;
 	padding: 20rpx;
-    color: #0084ff;
-    background: rgba(0,132,255,.1)!important;
-    border-color: transparent;
-    display: inline-block;
-    font-size: 26rpx;
-    line-height: 26rpx;
-    text-align: center;
-    cursor: pointer;
-    background: none;
-    border-radius: 6rpx;
+	color: #0084ff;
+	background: rgba(0,132,255,.1)!important;
+	border-color: transparent;
+	display: inline-block;
+	font-size: 26rpx;
+	line-height: 26rpx;
+	text-align: center;
+	cursor: pointer;
+	background: none;
+	border-radius: 6rpx;
 	position: relative;
    /* display: flex;
-    align-items: bottom;*/
+   align-items: bottom;*/
 }
 
 .up-sec .up-icon{
@@ -130,11 +170,11 @@
 	top:50%;
 	left:10rpx;
 	transform:translate(0,-50%); 
-    width:0;
-    height:0;
-    border-width:0 14rpx 25rpx 14rpx;
-    border-style:solid;
-    border-color:transparent transparent #0084ff transparent;
+	width:0;
+	height:0;
+	border-width:0 14rpx 25rpx 14rpx;
+	border-style:solid;
+	border-color:transparent transparent #0084ff transparent;
 }
 
 .up-sec text{

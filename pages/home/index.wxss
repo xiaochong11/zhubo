@@ -30,61 +30,32 @@
 	line-height:92rpx;
 	margin-left:8rpx;
 }
-.anchor-li{
+
+.dir-record{
+	border-top:1rpx solid #ccc;
+	padding:20rpx 0 10rpx;
 	display: flex;
-	/*justify-content: center;*/
-	align-items: center;
-	padding:35rpx 20rpx;
-	border-bottom:1rpx solid #eee;
+	flex-wrap: wrap;
+	background-color: #d3f3ff;
+	justify-content: center;
 }
-.anchor-container .anchor-order{
-	height: 40rpx;
-	line-height: 40rpx;
-    padding: 0 10rpx;
-    position: relative;
-    top: -4rpx;
-    margin-right: 10rpx;
-
-	color: #29d58e;
-    border: 2rpx solid #29d58e;
-    border-radius: 6rpx;
-    background: #edfcf6;
-
-    font-size:24rpx;
-   
-}
-.anchor-container .anchor-avatar image{
-	width:150rpx;
-	border-radius: 50%;
-	margin-right: 32rpx;
-	margin-left:10rpx;
-	display: block;
-}
-.anchor-container .anchor-info{
-	width:300rpx;
-}
-.anchor-info .anchor-name{
-	font-size:34rpx;
-	font-weight:400;
+.dir-record .dir-li{
+	height:56rpx;
+	box-sizing: border-box;
+	line-height:56rpx;
+	padding:0 24rpx;
+	background:#f6fcff;
+	border-radius:28px;
+	font-size:24rpx;
+	font-family:PingFangSC-Regular;
 	color:rgba(53,53,53,1);
-	line-height:48rpx;
-	width: 300rpx;
-	
-	overflow: hidden;
+	margin-right:24rpx;
+	margin-bottom:16rpx;
+}
+.dir-record .dir-li.cur{
+	color:#2ca6e0;
+}
+.dir-record .dir-li text{
 	white-space: nowrap;
-	text-overflow: ellipsis;
 }
 
-.anchor-info .anchor-comment{
-	color:#999;
-	font-size:28rpx;
-}
-
-.anchor-container .anchor-button{
-	border:1rpx solid #0099FF;
-	color:#0099FF;
-	border-radius:10rpx;
-	font-size:28rpx;
-	line-height: 28rpx;
-	padding:18rpx 28rpx;
-}

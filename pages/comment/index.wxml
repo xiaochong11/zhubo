@@ -15,9 +15,13 @@
         <view>
             <text>热度：{{anchorCommentObj.anchorInfo.rateAvg}}</text>
         </view>
+        <view class="attention" bindtap="addAttention">
+            <view class="heart {{isAttention?'red':''}}"></view>
+        </view>
         <view class="send-btn" bindtap="addComment">
             <text>发表短评</text>
         </view>
+
     </view>
     <scroll-view class="anchor-comment-container" scroll-y bindscrolltolower="scrollToLower">
         <view class="anchor-comment" wx:for="{{anchorCommentObj.commentList}}">

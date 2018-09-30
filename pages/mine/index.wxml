@@ -1,0 +1,69 @@
+<view class="mine-page">
+    <view class="login-sec" wx:if="{{!userInfo}}">
+        <view class="login-container" style="background-image:url('{{imgPath}}/mine/mine_btn_login.png')">
+            <view class="login-click">
+                <text>点击登录</text>
+            </view>
+            <view class="login-intro">
+                <text>登录后可收藏喜欢的主播</text>
+            </view>
+            <button  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo"></button>
+        </view>
+       
+    </view>
+    <view class="user-sec" wx:else>
+        <view class="mine-nickname" style="background-image:url('{{imgPath}}/mine/mine_nickname.png')">
+            <view>
+                <image mode="widthFix" src="{{userInfo.user_avatar}}"></image>
+            </view>
+            <view class="mine-right">
+                <view class="title">
+                    <text>您的昵称 Nickname</text>
+                </view>
+                <view class="content">
+                    {{userInfo.user_nickname}}
+                </view>    
+            </view>    
+        </view>
+        <view class="mine-upload" style="background-image:url('{{imgPath}}/mine/mine_upload.png')">
+            <view>
+                <image mode="widthFix" src="{{imgPath}}/mine/mine_icon_email.png" ></image>
+            </view>
+            <view class="mine-right">
+                <view class="title">
+                    <text>意见反馈送到 Feedback</text>
+                </view>
+                <view  class="content">
+                   <text>zhiboke@foxmail.com</text>
+                </view>    
+            </view>    
+        </view>
+        <view class="attention-title">
+            <text>我的关注：</text>
+        </view>
+        <view class="attention-sec">
+            <view class="anchor-container">
+                <view  class="anchor-li" wx:for="{{attentionArr}}" bindtap="toComment" data-anchor_id="{{item.anchor_id}}">
+                    <view class="anchor-order">
+                        <text>{{item.osName}}</text>
+                    </view>
+                    <view class="anchor-avatar">
+                        <image mode="widthFix" src="{{item.anchor_img}}"></image>
+                    </view>
+                    <view class="anchor-info">
+                        <view class="anchor-name">
+                            <text>{{item.anchor_name}}</text>
+                        </view>
+                        <view class="anchor-comment">
+                            <text>{{item.attentionDate}} 关注</text>
+                        </view>
+                    </view>
+                    <view class="arrow" style="background-image:url('{{imgPath}}/mine/mine_icon_right.png')">
+
+                    </view>   
+                </view>
+             </view>
+        </view>    
+    </view>
+   
+</view>    

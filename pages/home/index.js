@@ -9,6 +9,17 @@ import osArr from '../../utils/osArr.js';
 Page({
   	data: {
         anchorArr:[],
+        dirArr:[
+            {
+                dir_id:1,
+                name:'王者荣耀'
+            },
+            {
+                dir_id:2,
+                name:'英雄联盟'
+            },
+        ],
+        curDirId:1,
         imgPath:imgPath
   	},
     onReady: function (res) {
@@ -23,9 +34,9 @@ Page({
             // 要求小程序返回分享目标信息
             withShareTicket: true
         }); 
-        this.getAnchorData();
+        this.getAnchorData(this.data.curDirId);
   	},
-    getAnchorData(){
+    getAnchorData(dir_id){
         wx.showLoading({
 
         });
@@ -35,7 +46,7 @@ Page({
             url: baseUrl+'/anchor/getDirAnchor',
             method: 'GET',
             data: {
-                dir_id:'1',
+                dir_id:dir_id,
                 version:globalData.version
             },
             success: function(res) {
@@ -57,6 +68,13 @@ Page({
                 })
             }
         })
+    },
+    changeDir(e){
+        let dir_id = e.currentTarget.dataset.dir_id;
+        this.setData({
+            curDirId:dir_id
+        })
+        this.getAnchorData(this.data.curDirId);
     },
     toComment(e){
         let anchor_id = e.currentTarget.dataset.anchor_id;

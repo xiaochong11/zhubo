@@ -2,29 +2,29 @@
 App({
   onLaunch: function () {
     // 登录
-    // wx.login({
-    //     success: res => {
-    //         //发送 res.code 到后台换取 openId, sessionKey, unionId
-    //         let self = this;
-    //         wx.request({
-    //             url: this.globalData.baseUrl[this.globalData.env]+'/user/wx_start',
-    //             method: 'GET',
-    //             data: {
-    //                 code:res.code,
-    //                 version:this.globalData.version
-    //             },
-    //             success: function(res) {
-    //                 console.log(res);
-    //                 let data = JSON.parse(CryptoJS.AES.decrypt(JSON.stringify(res.data.data),self.globalData.key,{format: CryptoJSAesJson}).toString(CryptoJS.enc.Utf8));
-    //                 self.globalData.userInfo = data;
-    //                 // self.globalData.userInfo.user_id = 4;
-    //                 // self.globalData.userInfo = {
-    //                 //     user_id:3
-    //                 // }
-    //             }
-    //         })    
-    //     }
-    // })
+    wx.login({
+        success: res => {
+            //发送 res.code 到后台换取 openId, sessionKey, unionId
+            let self = this;
+            wx.request({
+                url: 'http://127.0.0.1:3000/api/site/user/wxStart',
+                method: 'GET',
+                data: {
+                    code:res.code,
+                    version:this.globalData.version
+                },
+                success: function(res) {
+                    console.log(res);
+                    
+                    self.globalData.userInfo = res.data.data;
+                    // self.globalData.userInfo.user_id = 4;
+                    // self.globalData.userInfo = {
+                    //     user_id:3
+                    // }
+                }
+            })    
+        }
+    })
 },
 globalData: {
     userInfo: null,
@@ -49,15 +49,15 @@ globalData: {
         let globalData = this.globalData;
         console.log(globalData);
         wx.request({
-            url: globalData.baseUrl[globalData.env]+'/user/wx_login',
-            method: 'GET',
+            url: 'http://127.0.0.1:3000/api/site/user/wxUpdateUser',
+            method: 'POST',
             data: {
                 user_id:globalData.userInfo.user_id,
-                nickname:userInfo.nickName,
-                avatar:userInfo.avatarUrl,
-                city:userInfo.city,
-                gender:userInfo.gender,
-                version:globalData.version
+                user_name:userInfo.nickName,
+                user_nickname:userInfo.nickName,
+                user_avatar:userInfo.avatarUrl,
+                user_city:userInfo.city,
+                user_gernder:userInfo.gender
             },
             success: function(res) {
                 let data = res.data.data;

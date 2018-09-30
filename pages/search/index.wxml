@@ -3,7 +3,7 @@
         <view class="input_container" style="background-image: url('https://upyun.lesson.bbwansha.com/dub/program/images/search/search_input.png');">
             <input type="text" value="{{word}}"  confirm-type="search"  bindblur="bindBlur" bindinput="bindInput" bindconfirm="bindConfirm" />
         </view>
-        <view class="search-delete can-clear}}" bindtap="deleteWord" wx:if="{{isCanClear}}">
+        <view class="search-delete can-clear" bindtap="deleteWord" wx:if="{{isCanClear}}">
             
         </view>
         <view class="search-delete" wx:else>

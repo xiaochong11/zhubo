@@ -11,7 +11,8 @@ Page({
         anchorCommentObj:null,
         imgPath:imgPath,
         isDialogShow:false,
-        commentInput:''
+        commentInput:'',
+        isAttention:false
   	},
     onReady: function (res) {
         
@@ -24,7 +25,30 @@ Page({
             withShareTicket: true
         }); 
         this.getAnchorComment(this.anchor_id);
+        this.getUserAnchorAttention(this.anchor_id);
   	},
+    getUserAnchorAttention(anchor_id){
+        wx.request({
+            url: 'http://127.0.0.1:3000/api/site'+'/userInfo/checkAttention',
+            method: 'GET',
+            data: {
+                anchor_id:anchor_id,
+                user_id:globalData.userInfo.user_id
+            },
+            success: res=> {
+                this.setData({
+                    isAttention:res.data.data.isAttention
+                })
+            },
+            fail:function(){
+                wx.showToast({
+                    title: '请求失败',
+                    icon: 'none',
+                    duration: 2000
+                })
+            }
+        })
+    },
     getAnchorComment(anchor_id){
         if(this.page=== -1){
             return;
@@ -164,5 +188,34 @@ Page({
             }
         })    
 
+    },
+    addAttention(){
+        if(this.data.isAttention){
+            wx.showToast({
+                title:'你已关注',
+                duration: 2000
+            })
+            return;
+        }
+        wx.request({
+            url: 'http://127.0.0.1:3000/api/site/userInfo/addAttention',
+            method: 'POST',
+            data: {
+                user_id:globalData.userInfo.user_id,
+                anchor_id:this.anchor_id
+            },
+            success:(res)=>{
+                if(res.data.code===200){
+                    wx.showToast({
+                        title:'关注成功',
+                        duration: 2000
+                    }),
+                    this.setData({
+                        isAttention:true
+                    })
+                }
+                
+            }
+        })
     }
 })

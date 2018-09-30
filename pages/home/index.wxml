@@ -10,6 +10,11 @@
         </view>
     </view>
     <view class="anchor-container">
+        <view class="dir-record">
+            <view class="dir-li {{curDirId === item.dir_id?'cur':''}}" wx:for="{{dirArr}}" bindtap="changeDir" data-dir_id="{{item.dir_id}}">
+                <text>{{item.name}}</text>
+            </view>
+        </view>
         <view  class="anchor-li" wx:for="{{anchorArr}}" bindtap="toComment" data-anchor_id="{{item.anchor_id}}">
             <view class="anchor-order">
                 <text>{{item.osName}}</text>
