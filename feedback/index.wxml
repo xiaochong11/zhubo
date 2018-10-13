@@ -1,0 +1,17 @@
+<view class="mine-page">
+    <view>
+        <text>你的建议或者意见：</text>
+    </view>
+    <view>
+        <textarea></textarea>
+    </view>
+    <view>
+        <text>你的联系方式（可选）</text>
+    </view>
+    <view>
+        <textarea></textarea>
+    </view>
+    <view>
+        <button>提交</button>
+    </view>
+</view>    

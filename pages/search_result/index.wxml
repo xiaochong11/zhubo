@@ -9,7 +9,7 @@
             </view>
         </view>
     </view>
-    <view class="anchor-container">
+    <view class="anchor-container" wx:if="{{anchorArr && anchorArr.length>0}}">
         <view  class="anchor-li" wx:for="{{anchorArr}}" bindtap="toComment" data-anchor_id="{{item.anchor_id}}">
             <view class="anchor-order">
                 <text>{{item.osName}}</text>
@@ -30,5 +30,9 @@
             </view>
         </view>
     </view>
-    
+    <view class="result-prompt" wx:else>
+        <view class="horizontal-line"></view>
+        <view class="prompt-word">没有搜索结果，系统还未收录该主播</view>
+        <view class="horizontal-line"></view>
+    </view>
 </view>

@@ -4,20 +4,28 @@ const app = getApp();
 const globalData = app.globalData;
 const baseUrl = globalData.baseUrl[globalData.env];
 const imgPath = globalData.imgPath[globalData.env];
+const commentLimit = 5;
 
-import osArr from '../../utils/osArr.js';
 Page({
   	data: {
         anchorCommentObj:null,
         imgPath:imgPath,
         isDialogShow:false,
         commentInput:'',
-        isAttention:false
+        isAttention:false,
+        userInfo:null
   	},
     onReady: function (res) {
         
     },
   	onLoad: function (options) {
+        if(globalData.userInfo.user_avatar){
+            this.setData({
+                userInfo:globalData.userInfo
+            })
+        }
+        console.log(this.data.userInfo);
+
         this.anchor_id = options.anchor_id||1;
         this.page = 0; 
         wx.showShareMenu({
@@ -27,26 +35,25 @@ Page({
         this.getAnchorComment(this.anchor_id);
         this.getUserAnchorAttention(this.anchor_id);
   	},
-    getUserAnchorAttention(anchor_id){
-        wx.request({
-            url: baseUrl+'/userInfo/checkAttention',
-            method: 'GET',
-            data: {
-                anchor_id:anchor_id,
-                user_id:globalData.userInfo.user_id
-            },
-            success: res=> {
-                this.setData({
-                    isAttention:res.data.data.isAttention
-                })
-            },
-            fail:function(){
-                wx.showToast({
-                    title: '请求失败',
-                    icon: 'none',
-                    duration: 2000
-                })
-            }
+    onShareAppMessage(obj){
+        return {
+            title: `为主播 ${this.data.anchorCommentObj.anchorInfo.anchor_name} 助威`,
+            path: '',
+            imageUrl:''
+        }
+    },
+    bindGetUserInfo: function(e) {
+        console.log(e.detail.userInfo);
+        app.postUserInfo(e.detail.userInfo,()=>{
+            this.setData({
+                userInfo:globalData.userInfo
+            })
+        });
+    },
+    toUser(e){
+        let user_id = e.currentTarget.dataset.user_id;
+        wx.navigateTo({
+            url:`../user/index?user_id=${user_id}`
         })
     },
     getAnchorComment(anchor_id){
@@ -70,14 +77,19 @@ Page({
                 wx.hideLoading({});
                 res.data.data.commentList.forEach((comment)=>{
                     comment.comment_date = new Date(comment.comment_date).toLocaleDateString();
+                    
                 });
+                // res.data.data.anchorInfo.dirName = dirConfigObj[res.data.data.anchorInfo.anchor_dir_id];
+                // res.data.data.anchorInfo.roomNum = dirConfigObj[]
 
-                res.data.data.anchorInfo.osIcon  = 'https://www.zhiboke.site'+ osArr.find((osObj)=>{
-                                                        return osObj.os === res.data.data.anchorInfo.anchor_os
-                                                    }).icon;
-                res.data.data.anchorInfo.osName = osArr.find((osObj)=>{
-                                                        return osObj.os === res.data.data.anchorInfo.anchor_os
-                                                    }).name.replace('直播','');
+                // res.data.data.anchorInfo.osIcon  = 'https://www.zhiboke.site'+ osArr.find((osObj)=>{
+                //                                         return osObj.os === res.data.data.anchorInfo.anchor_os
+                //                                     }).icon;
+                // res.data.data.anchorInfo.osName = osArr.find((osObj)=>{
+                //                                         return osObj.os === res.data.data.anchorInfo.anchor_os
+                //                                     }).name.replace('直播','');
+
+
                 if(self.page === 0){
                     self.setData({
                         anchorCommentObj:res.data.data
@@ -89,7 +101,7 @@ Page({
                         anchorCommentObj: self.data.anchorCommentObj
                     });
                 }
-                if(res.data.data.commentList.length===3){
+                if(res.data.data.commentList.length===commentLimit){
                     self.page++;
                 }else{
                     self.page = -1;
@@ -105,37 +117,17 @@ Page({
             }
         })
     },
-    scrollToLower(){
-        console.log('滚动到底部');
-        this.getAnchorComment(this.anchor_id);
-    },
-    addUpNum(e){
-        if(!globalData.userInfo.user_avatar){
-            wx.switchTab({
-                url:'../mine/index'
-            });
-            return;
-        } 
-         let comment_id = e.currentTarget.dataset.comment_id;
-         wx.request({
-            url: baseUrl+'/anchor/updateCommentTimes',
+    getUserAnchorAttention(anchor_id){
+        wx.request({
+            url: baseUrl+'/userInfo/checkAttention',
             method: 'GET',
             data: {
-                comment_id:comment_id,
-                item:'up'
+                anchor_id:anchor_id,
+                user_id:globalData.userInfo.user_id
             },
-            success:(res)=>{
-                wx.showToast({
-                    title:'点赞成功',
-                    duration: 2000
-                });
-                this.data.anchorCommentObj.commentList.forEach((comment)=>{
-                    if(comment_id = comment.comment_id){
-                        comment.comment_up++
-                    }
-                })
+            success: res=> {
                 this.setData({
-                    anchorCommentObj:this.data.anchorCommentObj
+                    isAttention:res.data.data.isAttention
                 })
             },
             fail:function(){
@@ -145,8 +137,13 @@ Page({
                     duration: 2000
                 })
             }
-        })    
+        })
     },
+    scrollToLower(){
+        console.log('滚动到底部');
+        this.getAnchorComment(this.anchor_id);
+    },
+    
     addComment(){
         this.setData({
             isDialogShow:true
@@ -160,26 +157,36 @@ Page({
     inputBlur(e){
         this.inputValue = e.detail.value;
     },
-    commentSubmmit(){
-        console.log(this.inputValue);
-        if(!globalData.userInfo.user_avatar){
+    commentSubmmit(e){
+        if(!this.data.userInfo){
             wx.switchTab({
                 url:'../mine/index'
             });
             return;
         } 
+        if(!this.inputValue){
+            wx.showToast({
+                icon: 'none',
+                title:'请输入评论内容',
+                duration: 2000
+            })
+        }
+
+        let isAnonymous = e.currentTarget.dataset.is_anonymous;
+        console.log(isAnonymous);
         wx.request({
             url: baseUrl+'/anchor/postAnchorComment',
             method: 'POST',
             data: {
                 anchor_id:this.anchor_id,
-                comment_auth_id:globalData.userInfo.user_id,
+                comment_auth_id:this.data.userInfo.user_id,
                 rate:5,
-                content:this.inputValue
+                content:this.inputValue,
+                anonymous:isAnonymous
             },
             success:(res)=>{
                 wx.showToast({
-                    title:'添加成功',
+                    title:'留言成功',
                     duration: 2000
                 }),
                 this.page = 0; 
@@ -202,7 +209,7 @@ Page({
 
     },
     addAttention(){
-        if(!globalData.userInfo.user_avatar){
+        if(!this.data.userInfo){
             wx.switchTab({
                 url:'../mine/index'
             });
@@ -219,7 +226,7 @@ Page({
             url: baseUrl+'/userInfo/addAttention',
             method: 'POST',
             data: {
-                user_id:globalData.userInfo.user_id,
+                user_id:this.data.userInfo.user_id,
                 anchor_id:this.anchor_id
             },
             success:(res)=>{
@@ -235,5 +242,61 @@ Page({
                 
             }
         })
-    }
+    },
+    addUpNum(e){
+        if(!this.data.userInfo.user_avatar){
+            wx.switchTab({
+                url:'../mine/index'
+            });
+            return;
+        } 
+        let comment_id = e.currentTarget.dataset.comment_id;
+        let curCommentObj = this.data.anchorCommentObj.commentList.find((comment)=>{
+                            return comment_id === comment.comment_id
+                        })
+        if(curCommentObj.isUp){
+            wx.showToast({
+                    title: '不能重复点赞',
+                    icon: 'none',
+                    duration: 2000
+                })
+            return;
+        }
+        
+        wx.request({
+            url: baseUrl+'/anchor/updateCommentTimes',
+            method: 'GET',
+            data: {
+                comment_id:comment_id,
+                user_id:this.data.userInfo.user_id,
+                item:'up'
+            },
+            success:(res)=>{
+                if(res.data.code === 200){
+                    wx.showToast({
+                        title:'点赞成功',
+                        duration: 2000
+                    });
+                    curCommentObj.isUp = true;
+                    curCommentObj.comment_up++;
+                    this.setData({
+                        anchorCommentObj:this.data.anchorCommentObj
+                    })
+                }else{
+                    wx.showToast({
+                        title: res.data.data || '点赞失败',
+                        icon: 'none',
+                        duration: 2000
+                     })
+                }
+            },
+            fail:function(){
+                wx.showToast({
+                    title: '请求失败',
+                    icon: 'none',
+                    duration: 2000
+                })
+            }
+        })    
+    },
 })

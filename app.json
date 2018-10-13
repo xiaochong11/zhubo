@@ -1,12 +1,16 @@
 {
   "pages":[
     "pages/home/index",
+    "pages/feedback/index",
+    
+    
     "pages/mine/index",
+    "pages/explore/index",
+   
+    
+    "pages/user/index",
+    
     "pages/comment/index",
-    
-    
-    
-    
     "pages/search/index",
     "pages/search_result/index"
   ],
@@ -17,19 +21,25 @@
     "navigationBarTextStyle":"black"
   },
   "tabBar": {
-        "color": "#61AF27",
-        "selectedColor": "#61AF27",
+        "color": "#99a7bb",
+        "selectedColor": "#cd89ed",
         "borderStyle": "white",
-        "backgroundColor": "#e6f7dc",
+        "backgroundColor": "#fff",
         "list": [{
           "pagePath":  "pages/home/index",
-          "iconPath":  "images/btn_home_n.png",
-          "selectedIconPath": "images/btn_home_t.png",
+          "iconPath":  "images/home_tab_n.png",
+          "selectedIconPath": "images/home_tab_t.png",
           "text": "首页"
-        }, {
+        },
+        {
+          "pagePath":  "pages/explore/index",
+          "iconPath":  "images/explore_tab_n.png",
+          "selectedIconPath": "images/explore_tab_t.png",
+          "text": "探索"
+        },{
           "pagePath":"pages/mine/index",
-          "iconPath": "images/btn_mine_n.png",
-          "selectedIconPath": "images/btn_mine_t.png",
+          "iconPath": "images/mine_tab_n.png",
+          "selectedIconPath": "images/mine_tab_t.png",
           "text": "我的"
         }]
     }

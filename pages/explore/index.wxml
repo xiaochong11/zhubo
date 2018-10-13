@@ -1,0 +1,60 @@
+<view class="explore-page">
+    <view class="dir-sec">
+        <view class="dir-record">
+            <view class="dir-li {{curDirId === item.dir_id?'cur':''}}" wx:for="{{dirArr}}" bindtap="changeDir" data-dir_id="{{item.dir_id}}">
+                <text>{{item.name}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="anchor-container" wx:if="{{curDirId===1}}">
+        <view  class="anchor-li" wx:for="{{userArr}}" bindtap="toUser" data-user_id="{{item.user_id}}">
+            <view class="user-order">
+                <text wx:if="{{index===0}}" style="color:#FFC125">{{index+1}}</text>
+                <text wx:elif="{{index===1}}" style="color:#A4D3EE">{{index+1}}</text>
+                <text wx:elif="{{index===2}}" style="color:#EECBAD">{{index+1}}</text>
+                <text wx:else="{{index===0}}">{{index+1}}</text>
+            </view>
+            <view class="anchor-avatar">
+                <image mode="widthFix" src="{{item.user_avatar}}"></image>
+            </view>
+            <view class="anchor-info">
+                <view class="anchor-name">
+                    <text>{{item.user_name}}</text>
+                </view>
+                <view class="anchor-comment">
+                    <text>送出<text class="comment_count">{{item.comment_count}}</text>条留言</text>
+                </view>
+            </view>
+            <view class="anchor-button">
+                <text>查看</text>
+            </view>
+        </view>
+    </view>
+    <view class="anchor-container" wx:else>
+        <view  class="anchor-li" wx:for="{{anchorArr}}" bindtap="toComment" data-anchor_id="{{item.anchor_id}}">
+            <view class="user-order">
+                <text wx:if="{{index===0}}" style="color:#FFC125">{{index+1}}</text>
+                <text wx:elif="{{index===1}}" style="color:#A4D3EE">{{index+1}}</text>
+                <text wx:elif="{{index===2}}" style="color:#EECBAD">{{index+1}}</text>
+                <text wx:else="{{index===0}}">{{index+1}}</text>
+            </view>
+            <view class="anchor-order">
+                <text>{{item.osName}}</text>
+            </view>
+            <view class="anchor-avatar">
+                <image mode="widthFix" src="{{item.anchor_img}}"></image>
+            </view>
+            <view class="anchor-info">
+                <view class="anchor-name">
+                    <text>{{item.anchor_name}}</text>
+                </view>
+                <view class="anchor-comment">
+                    <text><text class="comment_count">{{item.attention_count}}</text>个关注</text>
+                </view>
+            </view>
+            <view class="anchor-button">
+                <text>支持</text>
+            </view>
+        </view>
+    </view>
+</view>

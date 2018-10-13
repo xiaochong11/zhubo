@@ -8,15 +8,16 @@ const imgPath = globalData.imgPath[globalData.env];
 // import osArr from '../../utils/osArr.js';
 Page({
   	data: {
+        userArr:[],
         anchorArr:[],
         dirArr:[
             {
                 dir_id:1,
-                name:'王者荣耀'
+                name:'用户留言榜'
             },
             {
                 dir_id:2,
-                name:'英雄联盟'
+                name:'主播关注榜'
             },
         ],
         curDirId:1,
@@ -34,16 +35,10 @@ Page({
             // 要求小程序返回分享目标信息
             withShareTicket: true
         }); 
-        this.page = 0;
-        this.getAnchorData(this.data.curDirId);
-
-        wx.showModal({
-            title:'新版上线',
-            content:'1.点击用户头像，可查看用户信息；2.新增用户留言排行榜；3.优化留言框，支持多行格式',
-            showCancel:true
-        })
+        this.getUserRank();
+        this.getAnchorRank();
   	},
-    getAnchorData(dir_id){
+    getUserRank(){
         if(this.page===-1){
             return;
         }
@@ -52,11 +47,9 @@ Page({
         });
         let self = this;
         wx.request({
-            url: baseUrl+'/anchor/getDirAnchor',
+            url: baseUrl+'/rank/getUserCommentRank',
             method: 'GET',
             data: {
-                dir_id:dir_id,
-                page:this.page,
                 version:globalData.version
             },
             success: function(res) {
@@ -68,12 +61,12 @@ Page({
                 // })
                 if(self.page===0){
                     self.setData({
-                        anchorArr:res.data.data
+                        userArr:res.data.data
                     });
                 }else{
-                    self.data.anchorArr = self.data.anchorArr.concat(res.data.data);
+                    self.data.userArr = self.data.userArr.concat(res.data.data);
                     self.setData({
-                        anchorArr:self.data.anchorArr
+                        userArr:self.data.userArr
                     })
                 } 
                 if(res.data.data.length===20){
@@ -93,28 +86,50 @@ Page({
             }
         })
     },
-    scrollToLower(){
-        console.log('底部');
-        this.getAnchorData(this.data.curDirId);
+    getAnchorRank(dir_id){
+        let self = this;
+        wx.request({
+            url: baseUrl+'/rank/getAnchorAttentionRank',
+            method: 'GET',
+            data: {
+                version:globalData.version
+            },
+            success: function(res) {
+                self.setData({
+                    anchorArr:res.data.data
+                });
+            },
+            fail:function(){
+                wx.showToast({
+                    title: '请求失败',
+                    icon: 'none',
+                    duration: 2000
+                })
+            }
+        })
     },
     changeDir(e){
         let dir_id = e.currentTarget.dataset.dir_id;
         this.setData({
             curDirId:dir_id
         });
-        //重置page为0
-        this.page=0;
-        this.getAnchorData(this.data.curDirId);
+        if(this.data.curDirId===1){
+            this.getUserRank();
+        }else{
+            this.getAnchorRank();
+        }
+        
+    },
+    toUser(e){
+        let user_id = e.currentTarget.dataset.user_id;
+        wx.navigateTo({
+            url:`../user/index?user_id=${user_id}`
+        })
     },
     toComment(e){
         let anchor_id = e.currentTarget.dataset.anchor_id;
         wx.navigateTo({
             url:`../comment/index?anchor_id=${anchor_id}`
         })
-    },
-    toSearch(){
-        wx.navigateTo({
-            url:'../search/index'
-        });
     },
 })

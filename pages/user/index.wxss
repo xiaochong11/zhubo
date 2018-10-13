@@ -11,135 +11,11 @@
 	font-weight: normal;
 	font-style: normal;
 }
-.login-sec{
-	height:100vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	background-color: #ccecfe;
-}
-.login-sec .login-container{
-	position: relative;
-	width:600rpx;
-	height:202rpx;
-	margin: 0 auto;
-	background-size: 100% 100%;
-	background-repeat: no-repeat;
-	text-align: center;
-	padding:48rpx 0 69rpx;
-	box-sizing: border-box;
-	background-color:#fff;
-	border:40rpx;
-}
-.login-container .login-click{
-	height:48rpx;
-	font-size:48rpx;
-	font-family:YouYuan;
-	color:rgba(53,53,53,1);
-	line-height:53rpx;
-	margin-bottom: 25rpx;
-}
-
-.login-container .login-intro{
-	height:24rpx;
-	font-size:24rpx;
-	font-family:YouYuan;
-	color:rgba(155,155,155,1);
-	line-height:26rpx;
-}
-
-.login-sec button{
-	position:absolute;
-	left:0;
-	top:0;
-	width:600rpx;
-	height:202rpx;
-	background-color: transparent;
-}
-.login-sec button::after{
-  border: none;
-}
-
 
 .user-sec{
 	padding-top:20rpx;
 }
 
-/*.mine-right{
-	margin-left:27rpx;
-	vertical-align: middle;
-}
-.mine-right .title{
-	height:33rpx;
-	font-size:24rpx;
-	color:rgba(155,155,155,1);
-	line-height:26rpx;
-	margin-top: 5rpx;
-	margin-bottom:14rpx; 
-	font-family:YouYuan;
-}
-.mine-right .content{
-	height:34rpx;
-	font-size:24rpx;
-	font-family:'Droid Sans Mono';
-	font-weight: normal;
-	font-style: normal;
-	color:rgba(53,53,53,1);
-	line-height:34rpx;
-}
-.mine-nickname .mine-right .title{
-	margin:20rpx 0 12rpx; 
-}
-
-.mine-nickname .mine-right .content{
-	width:96rpx;
-	height:32rpx;
-	font-size:32rpx;
-	font-family:YouYuan;
-	color:rgba(53,53,53,1);
-	line-height:35rpx;
-}
-
-
-.mine-nickname{
-	padding:28rpx 0 20rpx 24rpx;
-
-	display: flex;
-	flex-wrap: none;
-	width:688rpx;
-	margin:0 auto;
-	box-sizing: border-box;
-	margin-bottom: 24rpx;
-	background-size: 100% 100%;
-}
-.mine-nickname image{
-	width:120rpx;
-	border-radius:50%;
-}
-.mine-upload{
-	padding:37rpx 0 31rpx 24rpx;
-	
-	display: flex;
-	flex-wrap: none;
-	width:688rpx;
-	margin:0 auto;
-	box-sizing: border-box;
-	margin-bottom: 24rpx;
-	background-size: 100% 100%;
-}
-.mine-upload image{
-	width:76rpx;
-}
-
-.mine-works{
-	height:162rpx;
-	box-sizing:border-box;
-	padding:37rpx 0 31rpx 24rpx;
-	position:relative;
-}
-.mine-works image{
-	width:76rpx;
-}*/
 .mine-userInfo{
 	text-align: center;
 	padding:20rpx 0;
@@ -152,7 +28,11 @@
 .mine-nickname{
 	font-weight: bold;
 }
-
+.user-intro{
+	margin:10rpx 0;
+	font-size: 26rpx;
+	text-align: center;
+}
 
 .mine-icon{
 	display: flex;

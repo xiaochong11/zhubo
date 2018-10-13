@@ -1,36 +1,8 @@
-.home-page{
+.-page{
 	font-size:30rpx;
 	font-family:PingFangSC-Regular;
 	height:100vh;
 	
-}
-.home-top{
-	width:100%;
-}
-.search-sec{
-	padding:14rpx 0;
-}
-.search{
-	margin:0 auto;
-	width:618rpx;
-	height:92rpx;
-	background-size: 100% 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.search .search-icon{
-	width:32rpx;
-	height:32rpx;
-	background-size: 100% 100%;
-}
-.search .search-prompt{
-	font-size:32rpx;
-	font-family:PingFangSC-Regular;
-	color:rgba(66,192,255,1);
-	line-height:92rpx;
-	margin-left:8rpx;
 }
 .dir-sec{
 	background-color:#f9f9f9;
@@ -63,5 +35,13 @@
 	white-space: nowrap;
 }
 
-
-
+.user-order{
+	 margin-right: 10rpx;
+}
+.comment_count{
+	color:#29d58e;
+	font-size: 30rpx;
+}
+.anchor-info .anchor-name {
+	width:220rpx;
+}

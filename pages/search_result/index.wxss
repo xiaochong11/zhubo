@@ -37,3 +37,29 @@
 	padding:35rpx 20rpx;
 	border-bottom:1rpx solid #eee;
 }
+
+
+.result-prompt{
+	font-size: 26rpx;
+	padding:20rpx;
+	margin:0 auto;
+	display: flex;
+	align-items: center;
+	justify-content:center; 
+	margin:32rpx auto;
+}
+
+.result-prompt .horizontal-line{
+	width:220rpx;
+	height:2rpx;
+	border-bottom:2rpx solid rgba(53,53,53,1);
+}
+.result-prompt .prompt-word{
+	height:45rpx;
+	font-size:32rpx;
+	font-family:PingFangSC-Light;
+	color:rgba(53,53,53,1);
+	line-height:45rpx;
+	margin:0 28rpx;
+	white-space: nowrap;
+}

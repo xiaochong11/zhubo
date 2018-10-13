@@ -122,10 +122,5 @@ Page({
         wx.navigateTo({
             url:`../comment/index?anchor_id=${anchor_id}`
         })
-    },
-    toFeedback(){
-        wx.navigateTo({
-            url:`../feedback/index`
-        })
     }
 })

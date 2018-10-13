@@ -1,0 +1,30 @@
+<view class="feedback-page">
+    <view class="advice">
+        <view>
+           <text>请输入你的意见或建议：</text> 
+        </view>
+        <view>
+            <textarea bindblur="contentBlur"></textarea>
+        </view>
+    </view>
+    <view class="contact">
+        <view>
+           <text>您的联系方式（可选）：</text> 
+        </view>
+        <view>
+            <textarea bindblur="contactBlur"></textarea>
+        </view>
+    </view>
+    <view class="contact-us">
+        <view>
+            <text>联系我们：</text>
+        </view>
+        <view>
+            <text>加工作微信：xiaochong_ha</text>
+        </view>
+    </view>
+    <view>
+        <button bindtap="postAdvice">提交</button>
+    </view>
+    
+</view>

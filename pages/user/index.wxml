@@ -1,16 +1,5 @@
 <view class="mine-page">
-    <view class="login-sec" wx:if="{{!userInfo}}">
-        <view class="login-container">
-            <view class="login-click">
-                <text>点击登录</text>
-            </view>
-            <view class="login-intro">
-                <text>登录后，可关注主播</text>
-            </view>
-            <button  open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo"></button>
-        </view>
-    </view>
-    <view class="user-sec" wx:else>
+    <view class="user-sec">
         <view class="mine-userInfo">
             <view>
                 <image mode="widthFix" src="{{userInfo.user_avatar}}"></image>
@@ -18,7 +7,7 @@
             <view class="mine-nickname">
                 {{userInfo.user_nickname}}
             </view> 
-            <view class="mine-icon">
+            <!-- <view class="mine-icon">
                 <view>
                     <view class="message-icon">
                     </view>
@@ -26,14 +15,17 @@
                         <text>消息</text>
                     </view>
                 </view>
-                <view bindtap="toFeedback">
+                <view>
                     <view class="feedback-icon"></view>
                     <view>
                         <text>反馈</text>
                     </view>
                 </view>
                 
-            </view>   
+            </view>    -->
+            <view class="user-intro">
+                <text>因为看直播，我们相遇</text>
+            </view>
         </view>
         <view class="dir-sec">
             <view class="dir-record">
@@ -71,33 +63,32 @@
                  <text>还有关注的主播</text>
              </view> -->
         </view>
-        <view class="anchor-comment" wx:for="{{commentArr}}" wx:if="{{curOptionId===1}}">
-            <view class="comment-title" wx:if="{{item.anonymous===1}}">
-                <image mode="widthFix" src="http://img3.imgtn.bdimg.com/it/u=924427432,4036562115&fm=27&gp=0.jpg"></image>
-                <text>(匿名) 给主播<text class="anchor_name"> {{item.anchor_name}}留言 </text>留言</text>
-            </view>
-            <view class="comment-title" wx:else>
-                <image mode="widthFix" src="{{userInfo.user_avatar}}"></image>
-                <text>给主播<text class="anchor_name"> {{item.anchor_name}} </text>留言</text>
-            </view>
-            <view class="main">
-                <!-- <view class="user-info">
-                    <image mode="widthFix" src="{{item.comment_auth_avatar}}"></image>
-                    <view class="user-name">{{item.comment_auth_name}}</view>
-                </view> -->
-                <view class="comment">
-                    <view class="content">
-                        <rich-text nodes="{{item.content}}"></rich-text>
+        <view wx:else>
+            <view class="anchor-comment" wx:for="{{commentArr}}" wx:if="{{item.anonymous===1}}">
+                <view class="comment-title">
+                    <image mode="widthFix" src="{{userInfo.user_avatar}}"></image>
+                    <text>给主播<text class="anchor_name"> {{item.anchor_name}} </text>留言</text>
+                </view>
+                <view class="main">
+                    <!-- <view class="user-info">
+                        <image mode="widthFix" src="{{item.comment_auth_avatar}}"></image>
+                        <view class="user-name">{{item.comment_auth_name}}</view>
+                    </view> -->
+                    <view class="comment">
+                        <view class="content">
+                            <rich-text nodes="{{item.content}}"></rich-text>
+                        </view>
+                        <view class="date">{{item.comment_date}}</view>
                     </view>
-                    <view class="date">{{item.comment_date}}</view>
                 </view>
-            </view>
-            <view class="footer">
-                <view class="up-sec" bindtap="addUpNum" data-comment_id="{{item.comment_id}}">
-                    <text>{{item.comment_up}} 点赞</text>
+                <view class="footer">
+                    <view class="up-sec" bindtap="addUpNum" data-comment_id="{{item.comment_id}}">
+                        <text>{{item.comment_up}} 点赞</text>
+                    </view>
                 </view>
-            </view>
+                </view>
+            </view>    
         </view>
-    </view>    
+        
    
 </view>    

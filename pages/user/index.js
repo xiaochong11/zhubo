@@ -14,27 +14,47 @@ Page({
         optionArr:[
             {
                 optionId:1,
-                name:'我的留言'
+                name:'TA的留言'
             },
             {
                 optionId:0,
-                name:'关注的主播'
+                name:'TA关注的主播'
             }
         ],
         curOptionId:1
 	},
-	onLoad: function () {
-		//this.getSetting();
-        console.log(globalData.userInfo);
-		if(globalData.userInfo.user_avatar){
-            this.setData({
-                userInfo:globalData.userInfo
-            });
-			this.getUserAttention(this.data.userInfo.user_id);
-            this.getUserComment(this.data.userInfo.user_id);
+	onLoad: function (options) {
+        let user_id = options.user_id;
+		if(user_id){
+            this.getUserInfo(user_id);
+            this.getUserComment(user_id);
+            this.getUserAttention(user_id);
 		}
 		
 	},
+    getUserInfo(user_id){
+         wx.request({
+            url: baseUrl+'/user/getUserInfo',
+            method: 'GET',
+            data: {
+                user_id:user_id,
+                ts:new Date().getTime()
+            },
+            success:res=>{
+                this.setData({
+                    userInfo:globalData.userInfo
+                });
+            },
+            fail:function(){
+                wx.showToast({
+                    title: '请求失败',
+                    icon: 'none',
+                    duration: 2000
+                })
+            }
+        })
+        
+    },
     changeOption(e){
         let optionId = e.currentTarget.dataset.option_id;
         this.setData({
@@ -121,11 +141,6 @@ Page({
         let anchor_id = e.currentTarget.dataset.anchor_id;
         wx.navigateTo({
             url:`../comment/index?anchor_id=${anchor_id}`
-        })
-    },
-    toFeedback(){
-        wx.navigateTo({
-            url:`../feedback/index`
         })
     }
 })

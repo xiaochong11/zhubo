@@ -1,0 +1,30 @@
+.feedback-page{
+	font-size:26rpx;
+	font-family:PingFangSC-Regular;
+	padding:40rpx;
+}
+.advice textarea{
+	box-sizing: border-box;
+	border-radius: 10rpx;
+	border:1rpx solid #ccc;
+	margin:20px 0;
+	width:100%;
+	padding:20rpx;
+}
+.contact textarea{
+	box-sizing: border-box;
+	border-radius: 10rpx;
+	border:1rpx solid #ccc;
+	margin:20px 0;
+	width:100%;
+	height:100rpx;
+	padding:20rpx;
+}
+
+button{
+	background-color:#29d58e;
+	color:#fff;
+}
+.contact-us{
+	margin:20rpx 0;
+}

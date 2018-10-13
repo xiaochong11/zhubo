@@ -12,23 +12,38 @@
                 <text>{{anchorCommentObj.anchorInfo.anchor_name}}</text>
             </view>
         </view>
-        <view>
-            <text>热度：{{anchorCommentObj.anchorInfo.rateAvg||0}}</text>
+        <view class="anchor-intro">
+            <text>{{anchorCommentObj.anchorInfo.dirName}} | </text>
+            <text>房间号:{{anchorCommentObj.anchorInfo.roomNum}}</text>
+          <!--   <text>主播热度：{{anchorCommentObj.anchorInfo.rateAvg||0}}</text> -->
         </view>
-        <view class="attention" bindtap="addAttention">
-            <view class="heart {{isAttention?'red':''}}"></view>
+        <view wx:if="{{userInfo}}">
+            <view class="attention" bindtap="addAttention">
+                <view class="heart {{isAttention?'red':''}}"></view>
+            </view>
+            <view class="send-btn" bindtap="addComment">
+                <text>留言(可匿名)</text>
+            </view>
         </view>
-        <view class="send-btn" bindtap="addComment">
-            <text>发表短评</text>
+        <view wx:else>
+            <view class="attention">
+                <view class="heart {{isAttention?'red':''}}">
+                    
+                </view>
+                <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo"></button>
+            </view>
+            <view>
+                <button class="send-btn" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">留言(可匿名)</button>
+            </view>
         </view>
-
     </view>
     <scroll-view class="anchor-comment-container" scroll-y bindscrolltolower="scrollToLower">
         <view class="anchor-comment" wx:for="{{anchorCommentObj.commentList}}">
             <view class="main">
                 <view class="user-info">
-                    <image mode="widthFix" src="http://img3.imgtn.bdimg.com/it/u=924427432,4036562115&fm=27&gp=0.jpg"></image>
-                    <view class="user-name">{{item.comment_auth||'匿名网友'}}</view>
+                    <image mode="widthFix" src="{{item.comment_auth_avatar}}"  wx:if="{{item.anonymous===1}}"></image>
+                    <image mode="widthFix" src="{{item.comment_auth_avatar}}" data-user_id="{{item.comment_auth_id}}" bindtap="toUser" wx:else></image>
+                    <view class="user-name">{{item.comment_auth_name}}</view>
                 </view>
                 <view class="comment">
                     <view class="content">
@@ -41,6 +56,7 @@
                 <view class="up-sec" bindtap="addUpNum" data-comment_id="{{item.comment_id}}">
                     <view class="up-icon"></view>
                     <text>{{item.comment_up}}</text>
+                    <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" wx:if="{{!userInfo}}"></button>
                 </view>
             </view>
         </view>
@@ -50,9 +66,14 @@
     </view>
     <view class="comment-dialog" wx:if="{{isDialogShow}}">
         <view>
-            <text>添加短评</text>
+            <text>留言</text>
         </view>
-        <input placeholder="为主播加油吧"  bindblur="inputBlur"/>
-        <button bindtap="commentSubmmit">提交</button>
+        <view>
+            <textarea placeholder="支持换行哦"  bindblur="inputBlur"/>
+        </view>
+        <view class="submit-sec">
+            <button bindtap="commentSubmmit" data-is_anonymous="1">匿名提交</button>
+            <button bindtap="commentSubmmit" data-is_anonymous="0" class="submit-name-btn">提交</button>
+        </view>
     </view>
 </view>

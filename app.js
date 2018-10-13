@@ -9,7 +9,7 @@ globalData: {
     env:'prd',
     version:10,
     baseUrl:{
-        'dev':'https://www.zhiboke.site/api/site',
+        'dev':'http://127.0.0.1:3000/api/site',
         'prd':'https://www.zhiboke.site/api/site'
     },
     imgPath:{
@@ -38,10 +38,9 @@ globalData: {
                 },
                 success: function(res) {
                     console.log(res);
-                    
                     self.globalData.userInfo = res.data.data;
                     // self.globalData.userInfo.user_avatar = '';
-                    // self.globalData.userInfo.user_id = 4;
+                    // self.globalData.userInfo.user_id = 1;
                     // self.globalData.userInfo = {
                     //     user_id:3
                     // }

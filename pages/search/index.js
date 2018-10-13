@@ -49,7 +49,7 @@ Page({
 		// })
 
 		this.setData({
-			hotWordArr:[{words:'寒冰'},{words:'猴三棍'}]
+			hotWordArr:[{words:'寒冰'},{words:'童子'},{words:'夕阳'}]
 		});
 	},
 	changeWord(e){
