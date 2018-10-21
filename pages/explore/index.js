@@ -8,40 +8,117 @@ const imgPath = globalData.imgPath[globalData.env];
 // import osArr from '../../utils/osArr.js';
 Page({
   	data: {
-        userArr:[],
+        userShareArr:[],
+        userCommentArr:[],
         anchorArr:[],
         dirArr:[
             {
+                dir_id:0,
+                name:'分享榜',
+            },
+            {
                 dir_id:1,
-                name:'用户留言榜'
+                name:'留言榜'
             },
             {
                 dir_id:2,
-                name:'主播关注榜'
+                name:'关注榜'
             },
         ],
-        curDirId:1,
+        curDirId:0,
         imgPath:imgPath
   	},
     onReady: function (res) {
         
     },
-  	onLoad: function () {
+  	onLoad: function (options) {
         console.log('onLoad');
         // wx.setNavigationBarTitle({
         //     title: '动画配音'
         // });
+        if(options.share_user_id){
+            app.addShareRecord(options.share_user_id,globalData.userInfo.user_id)
+        }
         wx.showShareMenu({
             // 要求小程序返回分享目标信息
             withShareTicket: true
         }); 
-        this.getUserRank();
-        this.getAnchorRank();
+        
+        this.getExploreNotice();
+        this.getUserShareRank();
   	},
-    getUserRank(){
-        if(this.page===-1){
-            return;
+    onShareAppMessage(obj){
+        return {
+            title: `主播热度榜`,
+            path: `/pages/explore/index?share_user_id=${globalData.userInfo.user_id}`,
+            imageUrl:''
         }
+    },
+
+    getExploreNotice(){
+        wx.request({
+            url: baseUrl+'/notice/getNotice',
+            method: 'GET',
+            data: {
+                type:'explore'
+            },
+            success: function(res) {
+                let notice = res.data.data;
+                if(notice && notice.title && !wx.getStorageSync('exploreModal_'+notice.notice_id)){
+                    wx.showModal({
+                        title:notice.title,
+                        content:notice.content,
+                        showCancel:true,
+                        complete:()=>{
+                            wx.setStorageSync('exploreModal_'+notice.notice_id,'yes');
+                        }
+                    })
+                }
+               
+            }
+        })    
+    },
+    changeDir(e){
+        let dir_id = e.currentTarget.dataset.dir_id;
+        this.setData({
+            curDirId:dir_id
+        });
+        if(this.data.curDirId===0){
+            this.getUserShareRank()
+        }else if(this.data.curDirId===1){
+            this.getUserCommentRank();
+        }else if(this.data.curDirId===2){
+            this.getAnchorRank();
+        }
+        
+    },
+    getUserShareRank(){
+        wx.showLoading({
+
+        });
+        let self = this;
+        wx.request({
+            url: baseUrl+'/rank/getUserShareRank',
+            method: 'GET',
+            data: {
+                version:globalData.version
+            },
+            success: function(res) {
+                wx.hideLoading({});
+                self.setData({
+                    userShareArr:res.data.data
+                });
+            },
+            fail:function(){
+                wx.showToast({
+                    title: '请求失败',
+                    icon: 'none',
+                    duration: 2000
+                })
+            }
+        })
+    },
+    getUserCommentRank(){
         wx.showLoading({
 
         });
@@ -54,28 +131,9 @@ Page({
             },
             success: function(res) {
                 wx.hideLoading({});
-                // res.data.data.forEach((anchor)=>{
-                //     anchor.osName = osArr.find((osObj)=>{
-                //         return osObj.os === anchor.anchor_os
-                //     }).name.replace('直播','');
-                // })
-                if(self.page===0){
-                    self.setData({
-                        userArr:res.data.data
-                    });
-                }else{
-                    self.data.userArr = self.data.userArr.concat(res.data.data);
-                    self.setData({
-                        userArr:self.data.userArr
-                    })
-                } 
-                if(res.data.data.length===20){
-                    self.page++;
-                }else{
-                    self.page = -1;
-                }
-                
-                
+                self.setData({
+                    userCommentArr:res.data.data
+                });
             },
             fail:function(){
                 wx.showToast({
@@ -108,18 +166,7 @@ Page({
             }
         })
     },
-    changeDir(e){
-        let dir_id = e.currentTarget.dataset.dir_id;
-        this.setData({
-            curDirId:dir_id
-        });
-        if(this.data.curDirId===1){
-            this.getUserRank();
-        }else{
-            this.getAnchorRank();
-        }
-        
-    },
+    
     toUser(e){
         let user_id = e.currentTarget.dataset.user_id;
         wx.navigateTo({

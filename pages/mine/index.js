@@ -30,7 +30,6 @@ Page({
             this.setData({
                 userInfo:globalData.userInfo
             });
-			this.getUserAttention(this.data.userInfo.user_id);
             this.getUserComment(this.data.userInfo.user_id);
 		}
 		
@@ -54,7 +53,7 @@ Page({
             this.setData({
                 userInfo:globalData.userInfo
             });
-            this.getUserAttention(globalData.userInfo.user_id);
+            this.getUserComment(this.data.userInfo.user_id);
         });
 	},
 	getUserAttention(user_id){

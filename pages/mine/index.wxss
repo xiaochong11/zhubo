@@ -60,6 +60,13 @@
   border: none;
 }
 
+.user-intro{
+	margin:10rpx 0;
+	font-size: 26rpx;
+	text-align: center;
+	color:#8590a6;
+}
+
 
 .user-sec{
 	padding-top:20rpx;

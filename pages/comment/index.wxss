@@ -9,14 +9,14 @@
 	background-size: auto auto;
 	background-position: center center;
 	background-repeat: no-repeat;
-	padding:40rpx 0;
+	padding:30rpx 0;
 	text-align: center;
 	color:#fff;
 	line-height: 50rpx;
 	
 }
 .anchor-intro{
-	margin:20rpx 0;
+	margin-top:20rpx;
 	font-size: 26rpx;
 	color:#eee;
 }
@@ -108,7 +108,7 @@
 	margin-left:20rpx;
 }
 .anchor-comment-container {
-	height:calc(100vh - 330rpx);
+	height:100vh;
 }
 
 .anchor-comment-container .anchor-comment{
@@ -271,4 +271,82 @@ button.submit-name-btn{
 	transform: translate(-50%,-50%);
 	border-radius:none;
 	background-color:transparent;
+}
+
+
+.page-footer{
+	box-sizing: border-box;
+	position: fixed;
+	padding:20rpx 20rpx;
+	bottom:0;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	background-color: #fff;
+	width:100%;
+	/*border-top:1rpx solid #999;*/
+}
+.page-footer .add-comment-sec{
+	display: flex;
+	align-items: center;
+	padding:0;
+	text-align: left;
+	margin:0;
+}
+.page-footer .add-comment-input{
+	width:360rpx;
+	height:60rpx;
+	border-radius:150rpx;
+	background-color: #ccc;
+	margin-right: 20rpx;
+	padding-left:30rpx;
+	font-size:24rpx;
+}
+
+.page-footer .add-comment-btn{
+	width:40rpx;
+	height:40rpx;
+	background-size: 100% 100%;
+	background-image: url('https://www.zhiboke.site/uploads//message_add.png');
+}
+
+.page-footer .attention-btn{
+	width:50rpx;
+	height:50rpx;
+	background-size: 100% 100%;
+	background-image: url('https://www.zhiboke.site/uploads/attention.png');
+}
+.page-footer .attention-btn.red{
+	background-image: url('https://www.zhiboke.site/uploads/attention_red.png');
+}
+
+.page-footer .share-btn{
+	width:50rpx;
+	height:50rpx;
+	background-size: 100% 100%;
+	background-image: url('https://www.zhiboke.site/uploads/share.png');
+}
+
+.page-right{
+	position: fixed;
+	right:0;
+	top:40%;
+	padding:10rpx 25rpx 10rpx 40rpx;
+	border-top-left-radius:60rpx;
+	border-bottom-left-radius:60rpx;
+	background-color:rgba(0,0,0,0.5);
+
+	color:#fff;
+	font-size:20rpx;
+}
+
+.page-right .index-icon{
+	width:40rpx;
+	height:40rpx;
+	background-image: url('https://www.zhiboke.site/uploads/home_icon.png');
+	background-size: 100% 100%;
+}
+
+button:hover{
+	background-color: transparent;
 }

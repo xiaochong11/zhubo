@@ -24,8 +24,9 @@ Page({
                 userInfo:globalData.userInfo
             })
         }
-        console.log(this.data.userInfo);
-
+        if(options.share_user_id){
+            app.addShareRecord(options.share_user_id,globalData.userInfo.user_id)
+        }
         this.anchor_id = options.anchor_id||1;
         this.page = 0; 
         wx.showShareMenu({
@@ -34,11 +35,18 @@ Page({
         }); 
         this.getAnchorComment(this.anchor_id);
         this.getUserAnchorAttention(this.anchor_id);
+
+
   	},
+    toIndex(){
+        wx.switchTab({
+            url:'../home/index',
+        })
+    },
     onShareAppMessage(obj){
         return {
             title: `为主播 ${this.data.anchorCommentObj.anchorInfo.anchor_name} 助威`,
-            path: '',
+            path: `/pages/comment/index?anchor_id=${this.anchor_id}&share_user_id=${globalData.userInfo.user_id}`,
             imageUrl:''
         }
     },
@@ -75,10 +83,10 @@ Page({
             },
             success: function(res) {
                 wx.hideLoading({});
-                res.data.data.commentList.forEach((comment)=>{
-                    comment.comment_date = new Date(comment.comment_date).toLocaleDateString();
+                // res.data.data.commentList.forEach((comment)=>{
+                //     comment.comment_date = new Date(comment.comment_date).toLocaleDateString();
                     
-                });
+                // });
                 // res.data.data.anchorInfo.dirName = dirConfigObj[res.data.data.anchorInfo.anchor_dir_id];
                 // res.data.data.anchorInfo.roomNum = dirConfigObj[]
 

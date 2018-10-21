@@ -41,15 +41,12 @@ globalData: {
                     self.globalData.userInfo = res.data.data;
                     // self.globalData.userInfo.user_avatar = '';
                     // self.globalData.userInfo.user_id = 1;
-                    // self.globalData.userInfo = {
-                    //     user_id:3
-                    // }
                 }
             })    
         }
     })
   },
-  postUserInfo(userInfo,cb){
+    postUserInfo(userInfo,cb){
         // let self = this;
         let globalData = this.globalData;
         console.log(globalData);
@@ -62,7 +59,7 @@ globalData: {
                 user_nickname:userInfo.nickName,
                 user_avatar:userInfo.avatarUrl,
                 user_city:userInfo.city,
-                user_gernder:userInfo.gender
+                user_gender:userInfo.gender
             },
             success: function(res) {
                 let data = res.data.data;
@@ -72,7 +69,7 @@ globalData: {
                     user_nickname:userInfo.nickName,
                     user_avatar:userInfo.avatarUrl,
                     user_city:userInfo.city,
-                    user_gernder:userInfo.gender
+                    user_gender:userInfo.gender
                 };
                 cb();
             },
@@ -84,5 +81,18 @@ globalData: {
                 })
             }
         })
-    }
+    },
+    addShareRecord(share_user_id,open_user_id){
+        wx.request({
+            url: this.globalData.baseUrl[this.globalData.env]+'/share/addShareRecord',
+            method: 'POST',
+            data: {
+                share_user_id:share_user_id,
+                open_user_id:open_user_id
+            },
+            success: function(res) {
+                console.log(res.data.data)
+            }
+        })    
+    },
 })

@@ -1,23 +1,27 @@
 {
   "pages":[
     "pages/home/index",
+    "pages/mine/index",
+
+    "pages/comment/index",
+    
     "pages/feedback/index",
     
     
-    "pages/mine/index",
+
     "pages/explore/index",
    
     
     "pages/user/index",
     
-    "pages/comment/index",
+    
     "pages/search/index",
     "pages/search_result/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "主播热榜",
+    "navigationBarTitleText": "主播热度榜",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {

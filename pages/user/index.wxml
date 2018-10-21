@@ -5,7 +5,8 @@
                 <image mode="widthFix" src="{{userInfo.user_avatar}}"></image>
             </view>
             <view class="mine-nickname">
-                {{userInfo.user_nickname}}
+                <view class="gender-icon {{userInfo.user_gender===2?'female':'male'}}" wx:if="{{userInfo.user_gender}}"></view>
+                <text>{{userInfo.user_nickname}}</text>
             </view> 
             <!-- <view class="mine-icon">
                 <view>
@@ -34,10 +35,38 @@
                 </view>
             </view>
         </view>
-        <!-- <view class="attention-title">
-            <text>关注的主播：</text>
-        </view> -->
-        <view class="attention-sec" wx:if="{{curOptionId===0}}">
+    </view>
+    <view class="option-content">
+        <view wx:if="{{curOptionId===0}}">
+            <view wx:for="{{commentArr}}">
+                <view class="anchor-comment" wx:if="{{item.anonymous===0}}" >
+                
+                    <view class="comment-title">
+                        <image mode="widthFix" src="{{userInfo.user_avatar}}"></image>
+                        <text>给主播<text class="anchor_name"> {{item.anchor_name}} </text>留言</text>
+                    </view>
+                    <view class="main">
+                        <!-- <view class="user-info">
+                            <image mode="widthFix" src="{{item.comment_auth_avatar}}"></image>
+                            <view class="user-name">{{item.comment_auth_name}}</view>
+                        </view> -->
+                        <view class="comment">
+                            <view class="content">
+                                <rich-text nodes="{{item.content}}"></rich-text>
+                            </view>
+                            <view class="date">{{item.comment_date}}</view>
+                        </view>
+                    </view>
+                    <view class="footer">
+                        <view class="up-sec" bindtap="addUpNum" data-comment_id="{{item.comment_id}}">
+                            <text>{{item.comment_up}} 点赞</text>
+                        </view>
+                    </view>
+                </view>
+               
+            </view>
+        </view>    
+        <view class="attention-sec" wx:else>
             <view class="anchor-container" wx:if="{{attentionArr && attentionArr.length>0}}">
                 <view  class="anchor-li" wx:for="{{attentionArr}}" bindtap="toComment" data-anchor_id="{{item.anchor_id}}">
                     <view class="anchor-order">
@@ -62,33 +91,6 @@
              <!-- <view wx:else>
                  <text>还有关注的主播</text>
              </view> -->
-        </view>
-        <view wx:else>
-            <view class="anchor-comment" wx:for="{{commentArr}}" wx:if="{{item.anonymous===1}}">
-                <view class="comment-title">
-                    <image mode="widthFix" src="{{userInfo.user_avatar}}"></image>
-                    <text>给主播<text class="anchor_name"> {{item.anchor_name}} </text>留言</text>
-                </view>
-                <view class="main">
-                    <!-- <view class="user-info">
-                        <image mode="widthFix" src="{{item.comment_auth_avatar}}"></image>
-                        <view class="user-name">{{item.comment_auth_name}}</view>
-                    </view> -->
-                    <view class="comment">
-                        <view class="content">
-                            <rich-text nodes="{{item.content}}"></rich-text>
-                        </view>
-                        <view class="date">{{item.comment_date}}</view>
-                    </view>
-                </view>
-                <view class="footer">
-                    <view class="up-sec" bindtap="addUpNum" data-comment_id="{{item.comment_id}}">
-                        <text>{{item.comment_up}} 点赞</text>
-                    </view>
-                </view>
-                </view>
-            </view>    
-        </view>
-        
-   
+        </view>    
+    </view>  
 </view>    

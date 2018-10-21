@@ -25,24 +25,53 @@ Page({
     onReady: function (res) {
         
     },
-  	onLoad: function () {
-        console.log('onLoad');
-        // wx.setNavigationBarTitle({
-        //     title: '动画配音'
-        // });
+  	onLoad: function (options) {
+        if(options.share_user_id){
+            app.addShareRecord(options.share_user_id,globalData.userInfo.user_id)
+        }
         wx.showShareMenu({
             // 要求小程序返回分享目标信息
             withShareTicket: true
         }); 
         this.page = 0;
         this.getAnchorData(this.data.curDirId);
-
-        wx.showModal({
-            title:'新版上线',
-            content:'1.点击用户头像，可查看用户信息；2.新增用户留言排行榜；3.优化留言框，支持多行格式',
-            showCancel:true
-        })
+        this.getHomeNotice();
   	},
+    onShareAppMessage(obj){
+        return {
+            title: `主播热度榜`,
+            path: `/pages/home/index?share_user_id=${globalData.userInfo.user_id}`,
+            imageUrl:''
+        }
+    },
+    getHomeNotice(){
+        wx.request({
+            url: baseUrl+'/notice/getNotice',
+            method: 'GET',
+            data: {
+                type:'index'
+            },
+            success: function(res) {
+                let notice = res.data.data;
+                if(notice && notice.title && !wx.getStorageSync('indexModal_'+notice.notice_id)){
+                    wx.showModal({
+                        title:notice.title,
+                        content:notice.content,
+                        showCancel:true,
+                        complete:()=>{
+                            wx.setStorageSync('indexModal_'+notice.notice_id,'yes');
+                            if(notice.navigate === 'explore'){
+                                wx.switchTab({
+                                    url:'../explore/index'
+                                });
+                            }
+                        }
+                    })
+                }
+               
+            }
+        })    
+    },
     getAnchorData(dir_id){
         if(this.page===-1){
             return;

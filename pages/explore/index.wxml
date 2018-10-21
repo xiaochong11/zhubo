@@ -6,8 +6,32 @@
             </view>
         </view>
     </view>
-    <view class="anchor-container" wx:if="{{curDirId===1}}">
-        <view  class="anchor-li" wx:for="{{userArr}}" bindtap="toUser" data-user_id="{{item.user_id}}">
+    <view class="anchor-container" wx:if="{{curDirId===0}}">
+        <view  class="anchor-li" wx:for="{{userShareArr}}" bindtap="toUser" data-user_id="{{item.user_id}}">
+            <view class="user-order">
+                <text wx:if="{{index===0}}" style="color:#FFC125">{{index+1}}</text>
+                <text wx:elif="{{index===1}}" style="color:#A4D3EE">{{index+1}}</text>
+                <text wx:elif="{{index===2}}" style="color:#EECBAD">{{index+1}}</text>
+                <text wx:else="{{index===0}}">{{index+1}}</text>
+            </view>
+            <view class="anchor-avatar">
+                <image mode="widthFix" src="{{item.user_avatar}}"></image>
+            </view>
+            <view class="anchor-info">
+                <view class="anchor-name">
+                    <text>{{item.user_name}}</text>
+                </view>
+                <view class="anchor-comment">
+                    <text>分享链接被打开<text class="comment_count">{{item.open_count}}</text>次</text>
+                </view>
+            </view>
+            <view class="anchor-button">
+                <text>查看</text>
+            </view>
+        </view>
+    </view>
+    <view class="anchor-container" wx:elif="{{curDirId===1}}">
+        <view  class="anchor-li" wx:for="{{userCommentArr}}" bindtap="toUser" data-user_id="{{item.user_id}}">
             <view class="user-order">
                 <text wx:if="{{index===0}}" style="color:#FFC125">{{index+1}}</text>
                 <text wx:elif="{{index===1}}" style="color:#A4D3EE">{{index+1}}</text>

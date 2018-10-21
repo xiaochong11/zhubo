@@ -13,15 +13,15 @@ Page({
         commentArr:[],
         optionArr:[
             {
-                optionId:1,
+                optionId:0,
                 name:'TA的留言'
             },
             {
-                optionId:0,
+                optionId:1,
                 name:'TA关注的主播'
             }
         ],
-        curOptionId:1
+        curOptionId:0
 	},
 	onLoad: function (options) {
         let user_id = options.user_id;
@@ -42,7 +42,7 @@ Page({
             },
             success:res=>{
                 this.setData({
-                    userInfo:globalData.userInfo
+                    userInfo:res.data.data
                 });
             },
             fail:function(){
@@ -61,11 +61,13 @@ Page({
             curOptionId:optionId
         });
 
-        if(optionId===0){
-            this.getUserAttention(this.data.userInfo.user_id);
-        }else{
-            this.getUserComment(this.data.userInfo.user_id);
-        }
+        //不让频繁请求
+        
+        // if(optionId===0){
+        //     this.getUserAttention(this.data.userInfo.user_id);
+        // }else{
+        //     this.getUserComment(this.data.userInfo.user_id);
+        // }
 
     },
 	bindGetUserInfo: function(e) {

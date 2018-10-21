@@ -1,43 +1,24 @@
 <view class="comment-page">
-    <view class="anchor-info">
-        <view class="anchor-avatar">
-            <image mode="widthFix" src="{{anchorCommentObj.anchorInfo.anchor_img}}"></image>
-        </view>
-        <view class="anchor-detail">
-            <view class="anchor-os">
-              <!--   <image mode="widthFix" src="{{anchorCommentObj.anchorInfo.osIcon}}"></image> -->
-                <text>{{anchorCommentObj.anchorInfo.osName}}</text>
-            </view>
-            <view>
-                <text>{{anchorCommentObj.anchorInfo.anchor_name}}</text>
-            </view>
-        </view>
-        <view class="anchor-intro">
-            <text>{{anchorCommentObj.anchorInfo.dirName}} | </text>
-            <text>房间号:{{anchorCommentObj.anchorInfo.roomNum}}</text>
-          <!--   <text>主播热度：{{anchorCommentObj.anchorInfo.rateAvg||0}}</text> -->
-        </view>
-        <view wx:if="{{userInfo}}">
-            <view class="attention" bindtap="addAttention">
-                <view class="heart {{isAttention?'red':''}}"></view>
-            </view>
-            <view class="send-btn" bindtap="addComment">
-                <text>留言(可匿名)</text>
-            </view>
-        </view>
-        <view wx:else>
-            <view class="attention">
-                <view class="heart {{isAttention?'red':''}}">
-                    
-                </view>
-                <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo"></button>
-            </view>
-            <view>
-                <button class="send-btn" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">留言(可匿名)</button>
-            </view>
-        </view>
-    </view>
     <scroll-view class="anchor-comment-container" scroll-y bindscrolltolower="scrollToLower">
+        <view class="anchor-info">
+            <view class="anchor-avatar">
+                <image mode="widthFix" src="{{anchorCommentObj.anchorInfo.anchor_img}}"></image>
+            </view>
+            <view class="anchor-detail">
+                <view class="anchor-os">
+                  <!--   <image mode="widthFix" src="{{anchorCommentObj.anchorInfo.osIcon}}"></image> -->
+                    <text>{{anchorCommentObj.anchorInfo.osName}}</text>
+                </view>
+                <view>
+                    <text>{{anchorCommentObj.anchorInfo.anchor_name}}</text>
+                </view>
+            </view>
+            <view class="anchor-intro">
+                <text>{{anchorCommentObj.anchorInfo.dirName}} | </text>
+                <text>房间号:{{anchorCommentObj.anchorInfo.roomNum}}</text>
+              <!--   <text>主播热度：{{anchorCommentObj.anchorInfo.rateAvg||0}}</text> -->
+            </view>
+        </view>
         <view class="anchor-comment" wx:for="{{anchorCommentObj.commentList}}">
             <view class="main">
                 <view class="user-info">
@@ -61,6 +42,39 @@
             </view>
         </view>
     </scroll-view>
+    <view class="page-footer"  wx:if="{{userInfo}}">
+        <view class="add-comment-sec" bindtap="addComment">
+            <view >
+                <input class="add-comment-input" disabled="{{true}}" placeholder="我也来说2句"/>
+            </view>
+            <view class="add-comment-btn" bindtap="addComment"></view>
+        </view>
+        <view class="attention-btn {{isAttention?'red':''}}" bindtap="addAttention">
+          
+        </view>
+        <view>
+            <button class="share-btn" open-type="share"></button>
+        </view>
+    </view>
+    <view class="page-footer"  wx:else>
+        <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class="add-comment-sec" >
+            <view>
+                <input class="add-comment-input" disabled="{{true}}" placeholder="我来说2句"/>
+            </view>
+            <view class="add-comment-btn" bindtap="addComment"></view>
+        </button>
+        <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class="attention-btn" >
+        </button>
+        <view>
+            <button class="share-btn" open-type="share"></button>
+        </view>
+    </view>
+    <view class="page-right" bindtap="toIndex">
+        <view class="index-icon"></view>
+        <view>
+            <text>首页</text>
+        </view>
+    </view>
     <view class="comment-mask" wx:if="{{isDialogShow}}" capture-bind:touchstart="hideDialog">
        
     </view>
